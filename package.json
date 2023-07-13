@@ -1,6 +1,27 @@
 {
   "dependencies": {
+    "bluebird": "^3.7.2",
     "dotenv": "^16.3.1",
     "pg": "^8.11.1"
-  }
+  },
+  "name": "qanda",
+  "description": "SDC_QandA",
+  "version": "1.0.0",
+  "main": "README.md",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vaughn-s-Astronauts/QandA.git"
+  },
+  "keywords": [
+    "SDC"
+  ],
+  "author": "Brett St. George",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vaughn-s-Astronauts/QandA/issues"
+  },
+  "homepage": "https://github.com/Vaughn-s-Astronauts/QandA#readme"
 }

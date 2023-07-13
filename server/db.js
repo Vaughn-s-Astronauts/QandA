@@ -1,14 +1,17 @@
 const dotenv = require('dotenv')
 dotenv.config();
-const { Client } = require('pg')
+const { Client } = require('pg');
+const Promise = require("bluebird");
 
-const db = new Client({
+const connection = new Client({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT
 })
+
+const db = Promise.promisifyAll(connection, { multiArgs: true });
 
 db.connect((err) => {
   if (err) {
