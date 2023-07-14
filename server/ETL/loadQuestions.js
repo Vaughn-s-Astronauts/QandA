@@ -1,4 +1,6 @@
-const readStream = require('./ETL.js')
+const path = require('node:path')
+require("dotenv").config({path: path.join(__dirname, '..', '.env')});
+const readStream = require('./startHere.js')
 const Import = require('./models.js')
 
 let questionData = '';
@@ -10,7 +12,8 @@ readStream.questions.on('data', (chunk) => {
 readStream.questions.on('end', () => {
   let arrObj = [];
   let lines = questionData.split('\n');
-  let headers = lines[0].split(',');
+  // let headers = lines[0].split(',');
+  let headers = ['question_id', 'product_id', 'body', 'date_written', 'asker_name', 'asker_email', 'reported', 'helpful']
   for (let r = 1; r < lines.length; r++) {
     let rowData = lines[r].split('","').join('~');
     rowData = rowData.split('",').join('~');
@@ -25,7 +28,7 @@ readStream.questions.on('end', () => {
       arrObj[r-1][headers[c]] = rowData[c].split('\'').join('`').split('\"').join('');
     }
   }
-  Import.addAllQuestions(arrObj.slice(0,1100000), arrObj.slice(1100000));
+  Import.addAllQuestions(arrObj.slice(0,1200000), arrObj.slice(1200000));
 })
 
 

@@ -1,5 +1,4 @@
-const dotenv = require('dotenv')
-dotenv.config();
+require("dotenv").config();
 const { Client } = require('pg');
 const Promise = require("bluebird");
 

@@ -1,4 +1,6 @@
-const readStream = require('./ETL.js')
+const path = require('node:path')
+require("dotenv").config({path: path.join(__dirname, '..', '.env')});
+const readStream = require('./startHere.js')
 const Import = require('./models.js')
 
 let answerDataArr = [];
@@ -30,7 +32,7 @@ readStream.answers.on('end', () => {
   // below line only for chunk3
   fragments.push(lines.shift());
 
-  let headers = ['id', 'question_id', 'body', 'date_written', 'answerer_name', 'answerer_email', 'reported', 'helpful']
+  let headers = ['ans_id', 'question_id', 'body', 'date_written', 'answerer_name', 'answerer_email', 'reported', 'helpful']
   for (let r = 0; r < lines.length; r++) {
     let rowData = lines[r].split('","').join('~');
     rowData = rowData.split('",').join('~');
@@ -50,6 +52,7 @@ readStream.answers.on('end', () => {
   console.log('fragments: ', fragments);
 
   // select either addFirstAnswers or addAppendAnswers
+  // Import.addFirstAnswers(arrObj);
   Import.addAppendAnswers(arrObj);
 })
 
